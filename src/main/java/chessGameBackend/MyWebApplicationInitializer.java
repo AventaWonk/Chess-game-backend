@@ -1,22 +1,21 @@
 package chessGameBackend;
 
-import org.springframework.web.WebApplicationInitializer;
-import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
-import org.springframework.web.servlet.DispatcherServlet;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletRegistration;
+import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
-public class MyWebApplicationInitializer implements WebApplicationInitializer {
+public class MyWebApplicationInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
-    public void onStartup(ServletContext servletCxt) {
+    @Override
+    protected Class<?>[] getRootConfigClasses() {
+        return new Class[]{WebAppConfig.class};
+    }
 
-        AnnotationConfigWebApplicationContext ac = new AnnotationConfigWebApplicationContext();
-        ac.register(WebAppConfig.class);
-        ac.refresh();
+    @Override
+    protected Class<?>[] getServletConfigClasses() {
+        return new Class[]{WebServletConfig.class};
+    }
 
-        DispatcherServlet servlet = new DispatcherServlet(ac);
-        ServletRegistration.Dynamic registration = servletCxt.addServlet("app", servlet);
-        registration.setLoadOnStartup(1);
-        registration.addMapping("/app/*");
+    @Override
+    protected String[] getServletMappings() {
+        return new String[]{"/"};
     }
 }

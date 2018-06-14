@@ -1,4 +1,4 @@
-package chessGameBackend;
+package chessGameBackend.config;
 
 import org.springframework.context.annotation.Configuration;
 

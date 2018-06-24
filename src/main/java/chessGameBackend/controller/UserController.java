@@ -1,46 +1,36 @@
 package chessGameBackend.controller;
 
 import chessGameBackend.model.User;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
+import chessGameBackend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
 @RequestMapping("/user")
 public class UserController {
 
     @Autowired
-    SessionFactory sessionFactory;
+    UserService userService;
 
     @PostMapping(value = "/add")
     public String addUser(User user) {
-        Session session = sessionFactory.openSession();
-        session.beginTransaction();
-        session.persist(user);
-        session.flush();
-        session.close();
+        if (userService.isUserExists(user.getLogin())) {
+
+        }
+
+        userService.addUser(user);
     }
 
     @PostMapping(value = "/delete")
     public String deleteUser(int id) {
-        Session session = sessionFactory.openSession();
-        session.beginTransaction();
-        User user = session.find(User.class, id);
-        session.remove(user);
-        session.flush();
-        session.close();
+        userService.deleteUser(id);
     }
 
     @PostMapping(value = "/update")
     public String updateUser(User user) {
-        Session session = sessionFactory.openSession();
-        session.beginTransaction();
-        session.update(user);
-        session.flush();
-        session.close();
+        userService.updateUser(user);
     }
 
 }

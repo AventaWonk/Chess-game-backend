@@ -2,7 +2,10 @@ package chessGameBackend.model;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "GAMEDATA")
@@ -15,33 +18,49 @@ public class GameData {
 
     private String pieceSet;
 
-    @ManyToOne
-    private User user;
+    private int whiteTime;
+
+    private int blacktTime;
+
+    private boolean isFinished;
 
     public int getId() {
         return id;
     }
 
-    public GameData setId(int id) {
+    public void setId(int id) {
         this.id = id;
-        return this;
     }
 
     public String getPieceSet() {
         return pieceSet;
     }
 
-    public GameData setPieceSet(String pieceSet) {
+    public void setPieceSet(String pieceSet) {
         this.pieceSet = pieceSet;
-        return this;
     }
 
-    public User getUser() {
-        return user;
+    public boolean isFinished() {
+        return isFinished;
     }
 
-    public GameData setUser(User user) {
-        this.user = user;
-        return this;
+    public void setFinished(boolean finished) {
+        isFinished = finished;
+    }
+
+    public int getWhiteTime() {
+        return whiteTime;
+    }
+
+    public void setWhiteTime(int whiteTime) {
+        this.whiteTime = whiteTime;
+    }
+
+    public int getBlacktTime() {
+        return blacktTime;
+    }
+
+    public void setBlacktTime(int blacktTime) {
+        this.blacktTime = blacktTime;
     }
 }

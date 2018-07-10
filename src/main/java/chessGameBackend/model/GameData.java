@@ -15,14 +15,11 @@ public class GameData {
     @GeneratedValue(generator="increment")
     @GenericGenerator(name="increment", strategy = "increment")
     private int id;
-
     private String pieceSet;
-
     private int whiteTime;
-
-    private int blacktTime;
-
+    private int blackTime;
     private boolean isFinished;
+    private String moves;
 
     public int getId() {
         return id;
@@ -56,11 +53,20 @@ public class GameData {
         this.whiteTime = whiteTime;
     }
 
-    public int getBlacktTime() {
-        return blacktTime;
+    public int getBlackTime() {
+        return blackTime;
     }
 
-    public void setBlacktTime(int blacktTime) {
-        this.blacktTime = blacktTime;
+    public void setBlackTime(int blackTime) {
+        this.blackTime = blackTime;
     }
+
+    public String getMoves() {
+        return moves;
+    }
+
+    public void setMoves(String moves) {
+        this.moves = moves;
+    }
+
 }

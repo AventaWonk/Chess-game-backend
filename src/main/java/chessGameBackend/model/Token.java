@@ -1,9 +1,8 @@
 package chessGameBackend.model;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import org.hibernate.annotations.NaturalId;
+
+import javax.persistence.*;
 import java.util.Calendar;
 
 /**
@@ -15,8 +14,14 @@ import java.util.Calendar;
 @Table(name = "TOKEN")
 public class Token {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private int id;
+
+    @NaturalId
     private String token;
 
+    @Temporal(TemporalType.DATE)
     private Calendar expiresAt;
 
     @OneToOne
